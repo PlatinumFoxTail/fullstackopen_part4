@@ -49,7 +49,32 @@ test('unique identifier property of the blog posts is named id', async () => {
       assert(blog.id !== undefined, 'id field missing')  
       assert(blog._id === undefined, '_id field should not be present')
     })
-  })
+})
+  
+test('blog of correct format can be added', async () => {
+    //number of blogs prior adding new blog
+    const blogsPriorAdd = await helper.blogsInDb()
+  
+    const newBlog = {
+        title: "Canonical string reduction",
+        author: "Edsger W. Dijkstra",
+        url: "http://www.cs.utexas.edu/~EWD/transcriptions/EWD08xx/EWD808.html",
+        likes: 12
+    }
+  
+    //POST request to add new blog
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(201)
+      .expect('Content-Type', /application\/json/)
+  
+    //number of blogs after adding new blog
+    const blogsPostAdd = await helper.blogsInDb()
+  
+    //check number of blogs increased
+    assert.strictEqual(blogsPostAdd.length, blogsPriorAdd.length + 1)
+})
 
 after(async () => {
   await mongoose.connection.close()
