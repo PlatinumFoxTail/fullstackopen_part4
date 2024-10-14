@@ -8,6 +8,7 @@ const api = supertest(app)
 const Blog = require('../models/blog')
 const helper = require('./test_helper')
 
+//ensuring db has two blogs before each test
 beforeEach(async () => {
     await Blog.deleteMany({})
     
@@ -37,6 +38,18 @@ test('the first blog is about React patterns', async () => {
     const titles = response.body.map(e => e.title)
     assert(titles.includes('React patterns'))
 })
+
+//making request to the API to check that 'id' is used instead of '_id'
+test('unique identifier property of the blog posts is named id', async () => {
+    const response = await api.get('/api/blogs')
+    const blogs = response.body
+  
+    //checking only id field and no _id in each blog
+    blogs.forEach(blog => {
+      assert(blog.id !== undefined, 'id field missing')  
+      assert(blog._id === undefined, '_id field should not be present')
+    })
+  })
 
 after(async () => {
   await mongoose.connection.close()
