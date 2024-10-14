@@ -76,6 +76,28 @@ test('blog of correct format can be added', async () => {
     assert.strictEqual(blogsPostAdd.length, blogsPriorAdd.length + 1)
 })
 
+test('blog can be deleted', async () => {
+    const blogsPriorDel = await helper.blogsInDb()
+    
+    //picking the first blog for deletion
+    const blogToDel = blogsPriorDel[0]
+    
+    //delete request
+    await api
+      .delete(`/api/blogs/${blogToDel.id}`)
+        .expect(204)
+    
+    const blogsPostDel = await helper.blogsInDb()
+  
+    //check number of blogs increased
+    assert.strictEqual(blogsPostDel.length, blogsPriorDel.length - 1)
+  
+    //check deleted blog is not in db
+    const titles = blogsPostDel.map(blog => blog.title)
+    assert(!titles.includes(blogToDel.title))
+})
+  
+
 after(async () => {
   await mongoose.connection.close()
 })
