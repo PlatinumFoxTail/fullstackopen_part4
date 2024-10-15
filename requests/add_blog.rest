@@ -1,10 +1,10 @@
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlNvbWVTYW1pIiwiaWQiOiI2NzBlMDkzMTAzOTA2YjMzYjQ1OWRhYzgiLCJpYXQiOjE3Mjg5NzYwMTF9.4UZy9pIz_hE3y6rzZ3DD3qrQKJOr-PjF7_wn38GMKAU
+//Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlNvbWVTYW1pIiwiaWQiOiI2NzBlMDkzMTAzOTA2YjMzYjQ1OWRhYzgiLCJpYXQiOjE3Mjg5NzYwMTF9.4UZy9pIz_hE3y6rzZ3DD3qrQKJOr-PjF7_wn38GMKAU
 
 {
-  "title": "Eka blogi",
-  "author": "Eevertti Pouta",
-  "url": "www.ekablogi.com",
-  "likes": 68
+  "title": "Invalid blogs!",
+  "author": "George Clooney ",
+  "url": "www.invalidblogs.com",
+  "likes": 0
 }
