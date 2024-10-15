@@ -123,6 +123,29 @@ test('updating likes of blog works', async () => {
     const updatedBlog = blogsPostUpdate.find(blog => blog.id === blogToUpdate.id)
     assert.strictEqual(updatedBlog.likes, blogToUpdate.likes + 1)
 })
+
+test('if likes property missing, default to 0', async () => {
+  const blogsPriorAdd = await helper.blogsInDb()
+
+  const newBlog = {
+    title: 'Blog missing likes',
+    author: 'Vesa Matti',
+    url: 'www.blognolikes.com',
+  }
+
+  const response = await api
+    .post('/api/blogs')
+    .send(newBlog)
+    .expect(201)
+    .expect('Content-Type', /application\/json/)
+  
+  const blogsPostAdd = await helper.blogsInDb()
+
+  assert.strictEqual(blogsPostAdd.length, blogsPriorAdd.length + 1)
+
+  const addedBlog = blogsPostAdd.find(blog => blog.id === response.body.id)
+  assert.strictEqual(addedBlog.likes, 0)
+})
   
 after(async () => {
   await mongoose.connection.close()

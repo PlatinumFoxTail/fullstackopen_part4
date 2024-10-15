@@ -1,10 +1,10 @@
 POST http://localhost:3001/api/blogs
 Content-Type: application/json
-//Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlNvbWVTYW1pIiwiaWQiOiI2NzBlMDkzMTAzOTA2YjMzYjQ1OWRhYzgiLCJpYXQiOjE3Mjg5NzYwMTF9.4UZy9pIz_hE3y6rzZ3DD3qrQKJOr-PjF7_wn38GMKAU
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IktpcmpvaXR0YWphS2FsbGUiLCJpZCI6IjY3MGUwZTBmNmY1NzQ5ZjY3MmUwYjgxZCIsImlhdCI6MTcyODk3NjU2NH0._66cyiOwNU_ROGdhjxqcmJRMv6bcrGFgy5qFqqjviZM
 
 {
-  "title": "Invalid blogs!",
-  "author": "George Clooney ",
-  "url": "www.invalidblogs.com",
-  "likes": 0
+  "title": "Likeable blogs",
+  "author": "Taylor Swift ",
+  "url": "www.likeableblogs.com",
+  "likes": 9999
 }
