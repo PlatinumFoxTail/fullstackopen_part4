@@ -9,6 +9,7 @@ const logger = require('./utils/logger')
 const middleware = require('./utils/middleware')
 const blogsRouter = require('./controllers/blogs')
 const usersRouter = require('./controllers/users')
+const loginRouter = require('./controllers/login')
 
 //MongoDB connection via .env
 mongoose.connect(config.MONGODB_URI)
@@ -23,6 +24,8 @@ mongoose.connect(config.MONGODB_URI)
 app.use(cors())
 //middleware for parsing request body
 app.use(express.json())
+//middleware for static files
+app.use('/api/login', loginRouter)
 
 //routes
 app.use('/api/blogs', blogsRouter)
