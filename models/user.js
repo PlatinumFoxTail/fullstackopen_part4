@@ -3,6 +3,7 @@ const mongoose = require('mongoose')
 const userSchema = mongoose.Schema({
   username: {
     type: String,
+    minlength: 3,
     required: true,
     unique: true
   },
@@ -23,13 +24,6 @@ userSchema.set('toJSON', {
     delete returnedObject.__v
     // the passwordHash should not be revealed
     delete returnedObject.passwordHash
-
-    return {
-      blogs: returnedObject.blogs,
-      username: returnedObject.username,
-      name: returnedObject.name,
-      id: returnedObject.id
-    }
   }
 })
 
