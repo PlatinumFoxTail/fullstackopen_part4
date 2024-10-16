@@ -59,15 +59,24 @@ router.delete('/:id', userExtractor, async (request, response) => {
 router.put('/:id', async (request, response) => {
   const body = request.body
 
-  const blog = {
+  const updatedBlog = {
     title: body.title,
     author: body.author,
     url: body.url,
-    likes: body.likes
+    likes: body.likes,
+    user: body.user
   }
 
-  const updatedBlog = await Blog.findByIdAndUpdate(request.params.id, blog, { new: true })
-  response.json(updatedBlog)
+  try {
+    const blog = await Blog.findByIdAndUpdate(request.params.id, updatedBlog, { new: true, runValidators: true }).populate('user', { username: 1, name: 1 })
+    if (blog) {
+      response.json(blog)
+    } else {
+      response.status(404).json({ error: 'could not find blog' })
+    }
+  } catch (error) {
+    response.status(400).json({ error: 'wrong id or validation error' })
+  }
 })
 
 module.exports = router
